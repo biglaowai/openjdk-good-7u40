@@ -1,0 +1,14 @@
+这个版本编译时会发生一个小数精度的错误，解决方法在evernote里面写了。
+
+1. 修改bridgesupport.gmk（路径：jdk/src/macosx/native/jobjc/bridgesupport.gmk）
+修改54行 all: 
+
+2. 修改AppKitFull.bridgesupport（路径：build-debug/stable_bridge_metadata/AppKitFull.bridgesupport） 
+修改1485行 
+<enum name='NSEventDurationForever' value='3.40282E+38'/> 
+
+3. 修改AppKitFramework.java（路径：build-debug/JObjC.build/src/jobjc/com/apple/jobjc/appkit/AppKitFramework.java） 
+
+修改355行
+public final double NSEventDurationForever(){ return 3.40282E+38d; }
+
